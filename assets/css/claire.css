@@ -1,0 +1,30 @@
+/* to change messy css for date and time p */
+.claire-datetime{
+	font-size:large; 
+	line-height:1; 
+	color:#069;
+}
+.claire-comment-box{
+	margin-left:40px; 
+	margin-top:10px;
+	min-width:310px;  
+	max-width:310px; 
+	resize:none;
+	height:30px;
+	padding:7px;
+}	
+.claire-currentnum-details{
+	padding:5px !important;
+}
+table.claire-table thead tr th.header{
+	font-size:13px !important;
+}
+.claire-btn{
+	background:#FFF;
+	font-size:15px !important;
+	padding:10px 20px;
+	
+}
+
+
+/* span with width between span1 and span2 */
