@@ -14,3 +14,4 @@ $( document ).ready(function() {
 			.tablesorterPager({container: $("#pager")})
 	
 });
+

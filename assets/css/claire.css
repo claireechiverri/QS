@@ -25,6 +25,15 @@ table.claire-table thead tr th.header{
 	padding:10px 20px;
 	
 }
+#button_login_error, #button_add_employee_error, #button_add_employee_success{
+	display:none;
+}
 
-
+#login_form tr td{
+	font-size: 16px;
+}
 /* span with width between span1 and span2 */
+
+#claire_nav{
+	margin-bottom:0;
+}

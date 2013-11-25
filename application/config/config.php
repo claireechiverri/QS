@@ -224,7 +224,7 @@ $config['cache_path'] = '';
 | MUST set an encryption key.  See the user guide for info.
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = 'aosijmadkmkm';
 
 /*
 |--------------------------------------------------------------------------
@@ -356,7 +356,7 @@ $config['rewrite_short_tags'] = FALSE;
 |
 */
 $config['proxy_ips'] = '';
-$config['javascript_location'] = 'http://localhost/codeigniter/themes/js/jquery/';
+$config['javascript_location'] = 'http://localhost/QS-mastervan/QS-master/themes/js/jquery/';
 $config['javascript_ajax_img'] = 'images/ajax-loader.gif';
 
 /* End of file config.php */

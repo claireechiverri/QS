@@ -8,6 +8,7 @@
 <script type="text/javascript" src="<?php echo base_url('/assets/js/jquery.tablesorter.min.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/js/tablesorter_paging.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/js/reid.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/js/claire.js');?>"></script>
 </head>
 
 <body>
@@ -22,7 +23,7 @@
                         
                             <li><a href="#employee_home">Home</a></li>
 							<li><a href="#employee_myinfo" data-toggle="tab">My Info</a></li>
-                            <li><a href="#logout_modal" data-toggle="modal"><i class="icon-off icon-white"></i></a></li>
+                            <li><a href="#logout_modal" title="Log out" data-toggle="modal"><i class="icon-off icon-white"></i></a></li>
                         </ul>
                    </div>
             
@@ -34,13 +35,13 @@
 	<div class="modal fade" id="logout_modal">
 	  <div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		<h3></h3>
+		<h3>Logout</h3>
 	  </div>
 	  <div class="modal-body">
 		<p>Are you sure you want to logout?</p>
 	  </div>
 	  <div class="modal-footer">
-		<a href="#" class="btn btn-success">Yes</a>
-		<a href="#" class="btn btn-danger">No</a>
+		<a href="<?php echo base_url('index.php/logout'); ?>" class="btn btn-success">Yes</a>
+		<a href="#" class="btn btn-danger" data-dismiss="modal">No</a>
 	  </div>
 	</div>

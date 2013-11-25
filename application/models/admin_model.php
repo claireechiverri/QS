@@ -6,7 +6,7 @@ class Admin_model extends CI_Model {
 		$this->load->database();
 	}
 	
-	public function get_teachers($user_ID = FALSE)
+	/*public function get_teachers($user_ID = FALSE)
 	{
 		if ($user_ID === FALSE)
 		{
@@ -17,6 +17,7 @@ class Admin_model extends CI_Model {
 		$query = $this->db->get_where('teachers', array('user_ID' => $user_ID));
 		return $query->row_array();
 	}
+	*/
 	
 	
 	

@@ -4,18 +4,103 @@ class User_model extends CI_Model {
 	public function __construct()
 	{
 		$this->load->database();
+		$this->user_type_admin = 1;
+		$this->user_id_admin = 1;
+		$this->user_type_employee = 2;
+		$this->table_admin = "admin";
+		$this->table_employee = "employee";
+		
 	}
-	public function checkCredentials()
+	
+	public function isAdmin($user_type)
+	{
+		return ($user_type == $this->user_type_admin)?true:false;
+	}
+	
+	
+	/**		this function assumes that username passed is already exisitng 
+	 **		CAE 11/24
+	 **/
+	public function userTypeIdentifier($username)
+	{
+		$query_admin = $this->db->get_where('admin', array('admin_username' => $username));
+		$row_admin = $query_admin->row();
+		$type = (empty($row_admin))?$this->user_type_employee:$this->user_type_admin;
+		return $type;
+	}
+	
+	/**	for Forgot Password functionality
+	*/
+	public function getEmailAddress($username)
+	{
+		$type = $this->userTypeIdentifier($username);
+		$table = ($this->isAdmin($type))?$this->table_admin:$this->table_employee;
+		$query	= $this->db->get_where($table, array($table.'_username' => $username));
+		$row = $query->row();
+		$email = ($this->isAdmin($type))?$row->admin_email_address:$row->employee_email_address;
+		return $email;
+	}
+	
+	public function getEmailAddressAdmin()
+	{
+		$query_admin = $this->db->get('admin');
+		$row_admin = $query_admin->row();
+		return $row_admin->admin_email_address;
+	}
+	
+	public function getPassword($username)
+	{
+
+		$type = $this->userTypeIdentifier($username);
+		$table = ($this->isAdmin($type))?$this->table_admin:$this->table_employee;
+		$query	= $this->db->get_where($table, array($table.'_username' => $username));
+		$row = $query->row();
+		$password = ($this->isAdmin($type))?$row->admin_password:$row->employee_password;
+		return $password;	
+	}
+	
+	public function validateCredentials()
 	{	
-		$username = $this->input->post('username');
-		$password = $this->input->post('password');
-		//$query = $this->db->select('*');
-		//$query = $this->db->from('user');
-		//$query = $this->db->where('user_username', $username);
-		//$query = $this->db->where('user_password', $password);
-		$query = $this->db->get_where('user', array('user_username' => $username));
-		return $query->row();
+	    $post_username = $this->input->post('username');
+		$post_password = $this->input->post('password');
+		$return_row = null;
+		$table = null;
+		$type = null;
+		
+		if($this->checkUsernameValidity()){
+			$type = $this->userTypeIdentifier($post_username);
+			$table = ($this->isAdmin($type))?$this->table_admin:$this->table_employee;
+			$password = $this->getPassword($post_username);
+			if($password === $post_password){
+				$return_row = $this->db->get_where($table, array($table.'_username' => $post_username));
+			}			
+		}
+		$ret_array = array(	'row' => $return_row,
+							'type' => $type);
+		return $ret_array;			 
+		
 	}
+	
+	public function checkUsernameValidity()
+	{
+		$post_username = $this->input->post('username');
+		$query_admin = $this->db->get_where('admin', array('admin_username' => $post_username));
+		$row_admin = $query_admin->row();
+		$query_employee = $this->db->get_where('employee', array('employee_username' => $post_username));
+		$row_employee = $query_employee->row();
+		return (!empty($row_admin) || !empty($row_employee))?true:false;
+	}
+	
+	public function checkIPValidity($ip_address)
+	{
+		$query_admin = $this->db->get_where('admin', array('admin_ip_address' => $ip_address));
+		$row_admin = $query_admin->row();
+		$query_employee = $this->db->get_where('employee', array('employee_ip_address' => $ip_address));
+		$row_employee = $query_employee->row();
+		$row_employee = $query_employee->row();
+		return (!empty($row_admin) || !empty($row_employee))?true:false;
+	}
+	
 	public function getInfo(){
 		/*test co check commit */
 	}

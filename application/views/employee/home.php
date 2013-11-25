@@ -9,7 +9,7 @@
 					<div id="wrap1" style="min-height:270px;">
 						<div class="nav">
 						   <div class="navbar-inner"> 
-							   <p class="navbar-text" style="text-align:center">Currently Serving </p>  
+							   <p class="navbar-text" style="text-align:center">Currently Serving</p>  
 							</div>
 						</div>
 						<div class="row">

@@ -33,5 +33,6 @@ class Admin extends CI_Controller {
 		$this->load->view('teachers/view', $data);
 		$this->load->view('templates/footer');
 	}
-
+	
+	
 }
