@@ -16,46 +16,32 @@
                     </tr> 
                     </thead> 
                     <tbody> 
+					<!-- check if empty -->
+					<?php foreach($admin_logs as $row) { ?>
                     <tr>
-                    	<td>11/05/2013 18:02:34</td>
-                        <td>192.168.1.101</td>
-                        <td>Log In</td>
-                        
+                    	<td><?php echo $row->user_logs_date;?></td>
+                        <td><?php echo $row->user_logs_ip_address;?></td>
+                        <td><?php echo ($row->user_logs_action == 1)?"Login":"Logout";?></td>     
                     </tr>
-                      <tr>
-                    	<td>11/05/2013 13:17:53</td>
-                        <td>192.168.1.102</td>
-                        <td>Log In</td>
-                        
-                    </tr>
-                      <tr>
-                    	<td>11/05/2013 8:24:11</td>
-                        <td>192.168.1.101</td>
-                        <td>Log Out</td>
-                        
-                    </tr>
-                      <tr>
-                    	<td>11/05/2013 11:34:09</td>
-                        <td>192.168.1.102</td>
-                        <td>Log Out</td>
-                        
-                    </tr>
+					<?php } ?>
+                      
+                    
           
                     </tbody> 
                     </table> 
                     <div id="pager" class="pager">
                     	<form>
-                            <img src="img/pager/first.png" class="first"/>
-                            <img src="img/pager/prev.png" class="prev"/>
+                            <img src="<?php echo base_url('/assets/img/pager/first.png');?>" class="first"/>
+                            <img src="<?php echo base_url('/assets/img/pager/prev.png');?>" class="prev"/>
                             <input type="text" class="pagedisplay input-mini" disabled/>
-                            <img src="img/pager/next.png" class="next"/>
-                            <img src="img/pager/last.png" class="last"/>
+                            <img src="<?php echo base_url('/assets/img/pager/next.png');?>" class="next"/>
+                            <img src="<?php echo base_url('/assets/img/pager/last.png');?>" class="last"/>
                             <select class="pagesize input-mini">
                             	<option selected="selected"  value="5">5</option>
-                                <option  value="10">10</option>
+                                <option value="10">10</option>
                                 <option value="20">20</option>
                                 <option value="30">30</option>
-                                <option  value="40">40</option>
+                                <option value="40">40</option>
                             </select>
 					  </form>
                     </div>

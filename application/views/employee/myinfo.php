@@ -1,6 +1,12 @@
 <!doctype html>
 <html>
-
+<head>
+<style type="text/css">
+	.accordion-group{
+		border:0;
+	}
+</style>
+</head>
 
 	
 		<div class="container" style="padding-left:100px;">
@@ -17,7 +23,7 @@
                                 <tr>
                                     <td>Username</td>
                                      <td></td>
-                                    <td>fuegova</td>
+                                    <td><?php echo $row->employee_username;?></td>
                                    
                                 </tr>
                              </thead>
@@ -61,7 +67,7 @@
                              <tr class="accordion-group">
                             	<td>Email Address</td>
                                 <td></td>
-                                <td ><p style="display:inline;">fuegova_companyname.com</p>
+                                <td ><p style="display:inline;"><?php echo $row->employee_email_address; ?></p>
                                
                                 
                                 </td>
@@ -69,17 +75,17 @@
                              <tr>
                             	<td>Counter Number</td>
                                 <td></td>
-                                <td>1</td>
+                                <td><?php echo $row->employee_counter_num; ?></td>
                             </tr>
                              <tr>
                             	<td>Date Registered</td>
                                 <td></td>
-                                <td>September 7, 2013</td>
+                                <td><?php echo $row->employee_date_registered; ?></td>
                             </tr>
                             <tr>
                             	<td>IP Address</td>
                                 <td></td>
-                                <td>192.168.255.255</td>
+                                <td><?php echo $row->employee_ip_address; ?></td>
                             </tr>
                         </table>
                  

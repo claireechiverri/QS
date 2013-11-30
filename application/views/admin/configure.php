@@ -3,8 +3,11 @@
 		.table td {
 			border-top:none;
 		}
+
 	 
 	</style>
+
+
 </head>
 <body>	
 		<div class="container" style="padding-left:100px;">
@@ -16,16 +19,16 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="tab1">                            
                             <div class="" style="padding: 0px 10px;">  
-                                 <form>
+                                 <form id="configuretime_form">
                                     <fieldset>  
                                         <table class="table" >
                                         
                                                <thead>
                                                 <tr>
                                                     <td>Opening Time:</td>
-                                                    <td><input type="time" disabled = "" ></td>
+                                                    <td><input type="text" id="opening_time" disabled="true"></td>
                                                     <td>Span Time:</td>
-                                                    <td><input type="time" disabled = "" ></td>
+                                                    <td><input type="time" disabled></td>
                                                    
                                                 </tr>
                                             </thead>
@@ -47,7 +50,12 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
-                                                <td style="position:relative"><input type="submit" class="btn btn-success pull-right" value="Edit"></td>
+                                                <td style="position:relative">
+													<a onclick="disableConfigureTime()" class="btn btn-danger pull-right" id="btnconfiguret_cancel" >Cancel</a>
+													<a class="btn btn-success pull-right" id="btnconfiguret_save">Save</a>
+													<a onclick="enableConfigureTime()" id="btnconfiguret_edit" class="btn btn-success pull-right">Edit</a>
+													
+												</td>
                                                
                                             </tr>
                                            
@@ -63,7 +71,7 @@
                     <div class="tab-pane" id="tab2">
                        <div class="row" style="padding: 0px 10px 10px 10px;">
                        		<div class="span6">
-                            	<form>
+                            	<form id="configureinfo_form">
                                     <fieldset>  
                                         <table class="table" >
                                         	<tr>
@@ -90,7 +98,9 @@
                             
                            
                            <div style="margin-top:200px; margin-right:10px"> 
-                            <input type="submit" class="btn btn-success pull-right " value="Edit">
+                            <a onclick="disableConfigureInfo()" class="btn btn-danger pull-right" id="btnconfigurei_cancel" >Cancel</a>
+							<a class="btn btn-success pull-right" id="btnconfigurei_save">Save</a>
+							<a onclick="enableConfigureInfo()" id="btnconfigurei_edit" class="btn btn-success pull-right">Edit</a>
                             </div>
                        </div>
                     </div>
@@ -105,3 +115,11 @@
             
             
 		</div>
+		
+			<script type="text/javascript">
+	
+	</script>
+		
+		
+	
+	

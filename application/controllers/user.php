@@ -12,6 +12,7 @@ class User extends CI_Controller {
 		
 		$this->load->model('user_model');
 		$this->load->model('utility_model');
+		$this->load->model('log_model');
 		$this->load->helper('url');
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -45,14 +46,7 @@ class User extends CI_Controller {
 		//echo $this->email->print_debugger();
 
 	}
-	
-	public function myinfo()
-	{
-		$this->load->view('templates/header/employee');
-		$this->load->view('employee/myinfo');
-		$this->load->view('templates/footer/internal');
-	}
-	
+
 	public function checkIPValidity()
 	{
 		$ip_address = $this->utility_model->getIPAddress();
@@ -106,6 +100,7 @@ class User extends CI_Controller {
 	
 	public function logout()
 	{
+		$this->log_model->createLogForLogout();
 		$this->session->sess_destroy();
 		redirect('/login/', 'refresh');
 	}
@@ -133,13 +128,22 @@ class User extends CI_Controller {
 					}
 					else
 					{
-						//$this->session->set_userdata('logged_in', true);
+											
 						if($this->user_model->isAdmin($data_user['type']))
 						{								
+							$user_id = $this->user_model->getAdminInfo()->admin_id;
+							$this->session->set_userdata('user_id', $user_id);
+							$this->log_model->createLogForLogin();			
 							redirect('/employee/viewEmployeeList/', 'refresh');							
 						}else{
-							redirect('employeeHome', 'refresh');
+							$user_id = $this->user_model->getUserInfo()->employee_id;
+							$this->session->set_userdata('user_id', $user_id);
+							$this->log_model->createLogForLogin();
+						
+							redirect('/employee/home/', 'refresh');
 						}	
+						$this->log_model->createLogForLogin();
+						
 					}
 				}
 

@@ -1,3 +1,6 @@
+<head>
+</head>
+
 	<div class="container" style="padding-left:100px;">
 			<div id="wrap1" class="span10" style="margin-bottom:50px;">
                 <div class="nav" >
@@ -6,9 +9,7 @@
                     </div>
                  </div>
      
-               	<div class="" style="padding: 0px 10px;">  
-                                             
-                   
+               	<div class="" style="padding: 0px 10px;">                                                                  
                     <table id="myTable" class="tablesorter"> 
                   	  <thead> 
                         <tr> 
@@ -23,29 +24,23 @@
                     </thead> 
                     <tbody> 
 					<?php foreach($employee_list as $row){ ?>
-                        <tr>
-                            	<td id="edit_username"><?php echo $row->employee_username;?></td>
-                                <td><?php echo $row->employee_date_registered;?></td>
-                                <td id="edit_emailad"><?php echo $row->employee_email_address;?></td>
-                                <td><?php echo $row->employee_ip_address?></td>
-                                <td class="text-center"><?php echo $row->employee_counter_num;?></td>
-								<td class="text-center">
-									<?php 	if($row->employee_status == 0)
-												echo "inactive";
-											else
-												echo "active";
-									?>
-								
-								</td>
-								                                <td>
-									<?php if($row->employee_status == 1) { ?>
-										<a onclick="deleteEmployee(this.id)" id="<?php echo $row->employee_id;?>" data-toggle="modal"><i class="icon-remove" title="delete" ></i></a>
-									<?php }else{ ?>
-										<a><i class="icon-remove icon-white"></i></a>
-									<?php } ?>
-								</td>
-								
-                        </tr>
+				
+							<tr>
+									<td class="edit_username" id="<?php echo $row->employee_id;?>"><?php echo $row->employee_username;?></td>
+									<td><?php echo $row->employee_date_registered;?></td>
+									<td class="edit_emailad" id="<?php echo $row->employee_id;?>"><?php echo $row->employee_email_address;?></td>
+									<td class="edit_ipaddress" id="<?php echo $row->employee_id;?>"><?php echo $row->employee_ip_address;?></td>
+									<td class="edit_counternum" id="<?php echo $row->employee_id;?>"><?php echo $row->employee_counter_num;?></td>
+									<td class="text-center"><?php echo ($row->employee_status == 0)?"inactive":"active"; ?></td>
+									<td>
+										<?php if($row->employee_status == 1) { ?>
+											<a onclick="deleteEmployee_first(this.id)" id="<?php echo $row->employee_id;?>" data-toggle="modal"><i class="icon-remove" title="delete" ></i></a>
+										<?php } ?>
+									</td>
+									<input type="hidden" id="holder" name="holder" value="f"/>
+									
+							</tr>
+					
 					<?php } ?>
 					
                     </tbody> 
@@ -54,7 +49,7 @@
                     <div id="pager" class="pager span10 pull-left">
 						<div class="span2 pull-left">
 							<form>
-								<input type="checkbox">
+								<input type="checkbox" id="inactive_list"/>
 								<span style="font-size:13px;">inactive employees</span>
 							</form>
 						</div>
@@ -71,6 +66,7 @@
                                 <option value="30">30</option>
                                 <option value="40">40</option>
                             </select>
+							
 					  </form>
                     </div>
                                    
@@ -90,7 +86,7 @@
 				<input type="hidden" name="employee_id" id="container_id" value=""/>
 			</div>
 			<div class="modal-footer">
-				<a href="#" class="btn btn-success">Yes</a>
+				<a onclick="deleteEmployee_second()" class="btn btn-success">Yes</a>
 				<a href="#" class="btn btn-danger" data-dismiss="modal">No</a>
 			</div>
 		</div>

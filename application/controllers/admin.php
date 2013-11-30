@@ -5,6 +5,8 @@ class Admin extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('admin_model');
+		$this->load->model('utility_model');
+		$this->load->helper('url');
 	}
 
 	public function index()
@@ -32,6 +34,33 @@ class Admin extends CI_Controller {
 		$this->load->view('templates/header', $data);
 		$this->load->view('teachers/view', $data);
 		$this->load->view('templates/footer');
+	}
+	
+	public function configure()
+	{
+		$this->utility_model->viewHeaderAdmin();
+		$this->load->view('admin/configure');
+		$this->utility_model->viewFooterInternal();
+	}
+	
+	/** used for editable dropdown
+	 **/
+	public function getCountersJsonArray()
+	{
+		$counters = $this->admin_model->getCompanyInfo();
+		$counters = $counters['company_num_of_counters'];
+		for($i = 1; $i <= $counters; $i++)
+		{
+		 	$array[$i] =  $i; 
+		}
+		 print json_encode($array);
+	}
+	public function myinfo()
+	{
+		$info['row']= $this->admin_model->getMyinfo();
+		$this->utility_model->viewHeaderAdmin();
+		$this->load->view('admin/myinfo',$info);
+		$this->utility_model->viewFooterInternal();
 	}
 	
 	

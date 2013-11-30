@@ -40,21 +40,28 @@
 
 $route['login'] = 'user/login';
 $route['logout'] = 'user/logout';
-$route['admin/(:any)'] = 'admin/view/$1';
-$route['user'] = 'user';
-$route['user/myinfo'] = 'user/myinfo';
+//$route['admin/(:any)'] = 'admin/view/$1';
+//$route['user'] = 'user';
+//$route['user/myinfo'] = 'user/myinfo';
 $route['forgotPassword'] = 'user/forgotPassword';
-$route['employeeHome'] = 'queue/viewEmployeeHome';
+$route['employee/home'] = 'queue/viewEmployeeHome';
 $route['employee/viewEmployeeList'] = 'employee/viewEmployeeList';
 $route['employee/viewAddEmployee'] = 'employee/viewAddEmployee';
+$route['employee/myinfo'] = 'employee/myinfo';
 $route['employee/addEmployee'] = 'employee/addEmployee';
 $route['employee/editEmployee'] = 'employee/editEmployee';
 $route['employee/deleteEmployee'] = 'employee/deleteEmployee';
-$route['employee/(:any)'] = 'employee/view/$1';
-$route['employee'] = 'employee';
-$route['(:any)'] = 'pages/view/$1';
-$route['default_controller'] = 'pages/view';
-$route['(:any)'] = 'pages/view/$1';
+$route['admin/configure'] = 'admin/configure';
+$route['admin/myinfo'] = 'admin/myinfo';
+$route['logs/employee'] = 'log/viewEmployeeLogs';
+$route['logs/admin'] = 'log/viewAdminLogs';
+$route['logs/queue'] = 'log/viewQueueLogs';
+$route['queue/getPriorityNumber'] = 'queue/getPriorityNumber';
+//$route['employee/(:any)'] = 'employee/view/$1';
+//$route['employee'] = 'employee';
+//$route['(:any)'] = 'pages/view/$1';
+$route['aboutTheCompany'] = 'queue/viewAboutTheCompany';
+$route['help'] = 'queue/viewCustomerHelp';
 $route['default_controller'] = 'queue/viewCustomerHome';
 
 

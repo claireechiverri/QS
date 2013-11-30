@@ -3,17 +3,19 @@
 <style type="text/css">
 
 .accordion-group {
-	border:none;
+
+border:none;
+
 }
 </style>
 </head>
 
 <body>	
-		<div class="container" style="padding-left:100px;">
-			<div id="wrap1" class="span10" style="margin-bottom:50px;">
+		<div class="container">
+			<div id="wrap1">
                 <div class="nav">
                  	<div class="navbar-inner">
-                        <h4>Administration</h4>
+                        <h4 class="navbar-text">Administration</h4>
                     </div>
                  </div>
                  
@@ -21,16 +23,16 @@
                        <table class="table" >
                        		<thead>
                                 <tr>
-                                    <td>Username</td>
+                                    <td>Username:</td>
                                      <td></td>
-                                    <td>adminusername</td>
+                                    <td><?php echo $row->admin_username;?></td>
                                    
                                 </tr>
                              </thead>
                             <tr class="accordion-group">
-                            	<td>Password</td>
+                            	<td>Password:</td>
                                 <td></td>
-                                <td ><p style="display:inline;">Updated 1 year ago </p>
+                                <td ><p style="display:inline;">edited 100 years ago </p>
                                 <a class="btn btn-success pop pull-right edit"  data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
                                 <i class="icon-edit"></i>
                                 </a>
@@ -40,20 +42,20 @@
                                  	  <table>
                                    	  <thead>
                                         <tr>
-                                            <td>Current </td>
+                                            <td>Current: </td>
                                             <td> <input type="password"/></td>
                                         </tr>
                                       </thead>
                                     <tr>
-                                    	<td>New </td>
+                                    	<td>New: </td>
                                     	<td> <input type="password"/></td>
                                     </tr>
                                     <tr>
-                                    	<td>Re-type New </td>
+                                    	<td>Re-type New: </td>
                                     	<td> <input type="password"/></td>
                                     </tr>
                                     <tr>
-                                    	<td><input type="submit" class="btn btn-primary" value=" Save "> <button class="btn btn-danger">Cancel</button> </td>
+                                    	<td><button class="btn btn-danger">cancel</button> <input type="submit" class="btn btn-primary" value=" save "></td>
                                         <td></td>
                                     
                                     </tr>
@@ -65,53 +67,28 @@
                                 </td>
                             </tr>
                             <tr class="accordion-group">
-                            	<td>Email Address</td>
+                            	<td>Email:</td>
                                 <td></td>
-                                <td ><p style="display:inline;">adminusername@company.com</p>
-                                <a class="btn btn-success pop pull-right edit"  data-toggle="collapse" data-parent="#accordion2" href="#collapsetwo">
-                                <i class="icon-edit"></i>
-                                </a>
-                                
-                                <div id="collapsetwo" class="accordion-body collapse">
-                                 <form> 
-                                   <table>
-                                   	  <thead>
-                                        <tr>
-                                            <td>Current: </td>
-                                            <td> <input type="email"/></td>
-                                        </tr>
-                                      </thead>
-                                    <tr>
-                                    	<td>New: </td>
-                                    	<td> <input type="email"/></td>
-                                    </tr>
-                                    <tr>
-                                    	<td>Re-type New: </td>
-                                    	<td> <input type="email"/></td>
-                                    </tr>
-                                    <tr>
-                                    	<td><input type="submit" class="btn btn-primary" value=" Save "> <button class="btn btn-danger">Cancel</button> </td>
-                                        <td></td>
-                                    
-                                    </tr>
-                                   
-                                   </table>
-                             	</form>
-                                </div>
-                                
-                                </td>
+                                <td > 
+                                    <div class="input-append">
+                                      <input  id="inputIcon" value= "<?php echo $row->admin_email_address;?>" type="text" disabled = "disabled">
+                                      <button class="btn enable btn-success"><i class="icon-edit"></i></button>
+                                    </div>                        
+                                 </td>
                             </tr>
-                            <tr>
-                            	<td>IP Address</td>
+                             <tr class="accordion-group">
+                            	<td>IP Address:</td>
                                 <td></td>
-                                <td>192.168.255.255
-									<a class="btn btn-success pop pull-right edit"  data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-										<i class="icon-edit"></i>
-									</a>
-								</td>
+                                <td > 
+                                    <div class="input-append">
+                                      <input  id="inputIcon" value="<?php echo $row->admin_ip_address;?>" type="text" disabled = "disabled">
+                                      <button class="btn enable btn-success"><i class="icon-edit"></i></button>
+                                    </div>                        
+                                 </td>
                             </tr>
                         </table>
                  
               	</div>
             </div>
 		</div>
+

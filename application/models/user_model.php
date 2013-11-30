@@ -33,6 +33,7 @@ class User_model extends CI_Model {
 	*/
 	public function getEmailAddress($username)
 	{
+		// should use getUserInfo
 		$type = $this->userTypeIdentifier($username);
 		$table = ($this->isAdmin($type))?$this->table_admin:$this->table_employee;
 		$query	= $this->db->get_where($table, array($table.'_username' => $username));
@@ -41,16 +42,42 @@ class User_model extends CI_Model {
 		return $email;
 	}
 	
+	public function getUserInfo()
+	{
+		$username = $this->input->post('username');
+		$type = $this->userTypeIdentifier($username);
+		$table = ($this->isAdmin($type))?$this->table_admin:$this->table_employee;
+		$query	= $this->db->get_where($table, array($table.'_username' => $username));
+		$row = $query->row();
+		return $row;
+	}
+	
+	public function getEmployeeInfo()
+	{
+		$username = $this->input->post('username');
+		$query	= $this->db->get_where('employee', array('employee_username' => $username));
+		$row = $query->row();
+		return $row;
+	}
+	
 	public function getEmailAddressAdmin()
 	{
-		$query_admin = $this->db->get('admin');
+		$query_admin = $this->db->get_where('admin', array('admin_id' => $this->user_id_admin));
 		$row_admin = $query_admin->row();
 		return $row_admin->admin_email_address;
 	}
 	
+	public function getAdminInfo()
+	{
+		$query_admin = $this->db->get('admin');
+		$row = $query_admin->row();
+		return $row;
+		
+	}
+	
 	public function getPassword($username)
 	{
-
+		// should use getUserInfo
 		$type = $this->userTypeIdentifier($username);
 		$table = ($this->isAdmin($type))?$this->table_admin:$this->table_employee;
 		$query	= $this->db->get_where($table, array($table.'_username' => $username));
@@ -81,12 +108,16 @@ class User_model extends CI_Model {
 		
 	}
 	
+	/** username belonging to deleted/inactive employee is considered invalid 
+	 ** modified by CAE 11/29
+	 **/
 	public function checkUsernameValidity()
 	{
 		$post_username = $this->input->post('username');
 		$query_admin = $this->db->get_where('admin', array('admin_username' => $post_username));
 		$row_admin = $query_admin->row();
-		$query_employee = $this->db->get_where('employee', array('employee_username' => $post_username));
+		$query_employee = $this->db->get_where('employee', array(	'employee_username' => $post_username, 
+																	'employee_status' => 1));
 		$row_employee = $query_employee->row();
 		return (!empty($row_admin) || !empty($row_employee))?true:false;
 	}
@@ -101,8 +132,5 @@ class User_model extends CI_Model {
 		return (!empty($row_admin) || !empty($row_employee))?true:false;
 	}
 	
-	public function getInfo(){
-		/*test co check commit */
-	}
 }
 ?>

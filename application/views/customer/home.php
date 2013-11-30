@@ -6,7 +6,7 @@
 					<div id="wrap1" style="min-height:270px;">
 						<div class="nav">
 						   <div class="navbar-inner"> 
-							   <p class="navbar-text" style="text-align:center">Currently Serving </p>  
+							   <p class="navbar-text" style="text-align:center">Currently Serving</p>  
 							</div>
 						</div>
 						<div class="row">
@@ -18,7 +18,7 @@
 					
 					</div>
 				
-						<button class="btn btn-large btn-success span4" style="margin-left:0px;" href="#getPN_modal" data-toggle="modal">Get a Priority Number</button>
+						<a class="btn btn-large btn-success span4" onclick="getPriorityNumber()" style="margin-left:0px;">Get a Priority Number</a>
 				
 				</div>
                 
@@ -31,7 +31,7 @@
                             	<div class="row">
                                 	<div class="btn-group"  style="margin-left:30px;">
 										<button class="btn btn-large claire-btn">Last Number Taken</button>
-										<button class="btn btn-large claire-btn">12</button>
+										<button class="btn btn-large claire-btn"> <?php echo $last_number;?></button>
                                     </div>
 								</div>
 				
@@ -129,11 +129,11 @@
 				<h3>Priority Number</h3>
 			</div>
 			<div class="modal-body">
-				<p>Your priority number is 17. Please present this code <1fsdf3> to the counter.</p>
+				<p>Your priority number is <span id="pn_container"></span>. Please present this code < <span id="code_container"></span> > to the counter.</p>
 			</div>
 			<div class="modal-footer">
-				<a href="#" class="btn btn-success">Ok</a>
-				<a href="#cancelPN_modal" class="btn btn-danger" data-toggle="modal">Cancel</a>
+				<a href="#" class="btn btn-success" data-dismiss="modal">Ok</a>
+				<a onclick="cancelPriorityNumber()" id="cancelPN_btn" class="btn btn-danger" data-toggle="modal">Cancel</a>
 			</div>
 		</div>
 		

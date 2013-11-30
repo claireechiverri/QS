@@ -26,6 +26,12 @@ class Utility_model extends CI_Model {
 	{
 		$this->load->view('templates/footer/internal');
 	}
+
+	public function viewFooterExternal()
+	{
+		$this->load->view('templates/footer/external');
+	}
+	
 	
 	public function getCurrent()
 	{	
@@ -33,28 +39,35 @@ class Utility_model extends CI_Model {
 		$timezone = 'UP7';
 		$daylight_saving = TRUE;
 		$now = gmt_to_local($timestamp, $timezone, $daylight_saving);
-		$data['time'] = mdate("%h:%i %a", $now);
-		$data['day'] = mdate("%l", $now);
-		$data['date'] = mdate("%F %j, %Y", $now);
-		return $data;
+		return $now;
 	}
 	
+	// 24-hour time format
+	public function getCurrentTimestamp()
+	{
+		$current = $this->getCurrent();
+		return unix_to_human($current, TRUE, 'eu');
+	}
+	
+	//format "November 5, 2013"
 	public function getCurrentDateString()
 	{
 		$current = $this->getCurrent();
-		return $current['date'];
+		return mdate("%F %j, %Y", $current);
+		
 	}
 	
+	//format 6:35 pm
 	public function getCurrentTimeString()
 	{
 		$current = $this->getCurrent();
-		return $current['time'];
+		return mdate("%h:%i %a", $current);
 	}
 	
 	public function getCurrentDayString()
 	{
 		$current = $this->getCurrent();
-		return $current['day'];
+		return mdate("%l", $current);
 	}
 	
 	public function getIPAddress()

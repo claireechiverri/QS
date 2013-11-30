@@ -1,8 +1,5 @@
 <!doctype html>
-<html>
-
-
-
+<body onload="updateClock(); setInterval('updateClock()', 1000 )" >
 		<div class="container"  style="padding-left:100px;">
             <div class="row">    
                 <div class="span6"  style="padding-bottom:50px;">
@@ -40,14 +37,23 @@
                 </div>
 				<div class="span1"></div>
                 <div class="span4" style="margin-top:55px;">
-               			<p class="claire-datetime" style="margin-left:20px;"><?php echo $time; ?> | <?php echo $day; ?> </p>
+               			<p class="claire-datetime" style="margin-left:20px;"><span id="clock">&nbsp;</span> | <?php echo $day; ?> </p>
 						<p class="claire-datetime" style="margin-left:20px;"><?php echo $date; ?><p>
-                      <span class="span3" id="info" style="margin-top:15px;"> Currently Serving &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <b><strong>29</strong></b> </span>
-                      <span class="span3" id="info" style="margin-top:15px;">Number of Cancellations &nbsp&nbsp&nbsp <b><strong>2</strong></b> </span>
-                      <span class="span3" id="info" style="margin-top:15px;">Last Number Taken &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  </b><strong>25</strong></b></span>
+	                	<span class="span3" id="info" style="margin-top:15px;"> 
+	                      	<span class="span2" style="margin-left:0;">Currently Serving </span>
+	                      	<span class="span1 text-right" style="margin-left:15px;"><b><strong>29</strong></b></span> 
+	                    </span>
+                    	<span class="span3" id="info" style="margin-top:15px;">
+                    		<span class="span2" style="margin-left:0; width:155px;">Number of Cancellations</span>
+                    		<span class="span1 text-right" style="margin-left:0px;"><b><strong>2</strong></b> </span>
+                    	</span>
+                      	<span class="span3" id="info" style="margin-top:15px;">
+                      		<span class="span2" style="margin-left:0;">Last Number Taken</span>
+                    		<span class="span1 text-right" style="margin-left:15px;"><b><strong><?php echo $last_number; ?></strong></b> </span>
+                    	</span>
                 </div>
 			</div>
 			
 		</div>
-
+</body>
 	

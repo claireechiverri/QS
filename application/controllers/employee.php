@@ -6,20 +6,43 @@ class Employee extends CI_Controller {
 		parent::__construct();
 		$this->load->model('employee_model');
 		$this->load->model('utility_model');
+		$this->load->model('user_model');
 		$this->load->model('queue_model');
 		$this->load->helper('url');
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-		$this->load->library('javascript');
+		$this->load->library('session');
 	}
-	public function editEmployee()
+
+	public function editCounterNumber()
+	{
+		$this->editEmployee('employee_counter_num');
+	}
+	public function editEmailAddress()
+	{
+		$this->editEmployee('employee_email_address');
+	}
+
+	public function editIPAddress()
+	{
+		$this->editEmployee('employee_ip_address');
+	}
+	public function editUsername()
+	{
+		$this->editEmployee('employee_username');
+	}
+
+	public function editEmployee($field)
 	{
 		$new = $this->input->post('value');
-		$this->form_validation->set_rules('value', 'Username', 'required');
+		$id = $this->input->post('id');
+		//$this->form_validation->set_rules('value', 'Username', 'required');
+		$this->employee_model->editEmployee($field);
 		echo $new;
 	}
 	public function viewEmployeeList()
 	{
+		
 		$this->load->view('templates/header/admin');
 		$data['employee_list'] = $this->getEmployeeList();
 		$this->load->view('employee/employee_list.php', $data);
@@ -36,6 +59,41 @@ class Employee extends CI_Controller {
 		return $this->employee_model->getNumberOfEmployees();
 	}
 	
+	/** used for editable 
+	 ** returned to ajax request
+	 **/
+	public function isUniqueUsername()
+	{
+
+		$data = array();
+		$data['isUnique'] = $this->isUnique('employee_username');
+		//$data['isUnique'] = false;
+		echo json_encode($data);
+	}
+
+	public function isUniqueEmailAddress()
+	{
+
+		$data = array();
+		$data['isUnique'] = $this->isUnique('employee_email_address');
+		//$data['isUnique'] = false;
+		echo json_encode($data);
+	}
+
+	public function isUniqueIPAddress()
+	{
+		$data = array();
+		$data['isUnique'] = $this->isUnique('employee_ip_address');
+		//$data['isUnique'] = false;
+		echo json_encode($data);
+	}
+
+
+	public function isUnique($field){
+		return $this->employee_model->isUnique($field);
+
+	}
+
 	public function canAddEmployee()
 	{
 		$no_of_counters = $this->queue_model->getNumberOfCounters();
@@ -53,9 +111,6 @@ class Employee extends CI_Controller {
 		$this->utility_model->viewHeaderAdmin();
 		$data['no_of_counters'] = $this->queue_model->getNumberOfCounters();
 		$data['ip_address'] = $this->utility_model->getIPAddress();
-		//$test['no_of_employees'] = $this->employee_model->getNumberOfActiveEmployees();
-		//$data['error_add_employee'] = false; 
-		//$data['error_add_employee_db'] = false; 
 		
 		if($this->canAddEmployee())
 		{	
@@ -90,13 +145,22 @@ class Employee extends CI_Controller {
 	public function deleteEmployee()
 	{
 		$id = $this->input->post('employee_id');
-		$this->employee_model->deleteEmployee($id);
-		$data['success_delete'] = true;
-		$this->viewEmployeeList();
+		$error_db = $this->employee_model->deleteEmployee($id);
+		if($error_db != 0)
+		{
+			$error = array();
+			$error['error_flag'] = true;	
+			$error['error_msg'] = "Something went wrong with deleting the employee";			
+		}
+		echo json_encode($error);
 	}
 	
-	
-	
-	
+	public function myinfo()
+	{
+		$info['row']= $this->employee_model->getMyinfo();
+		$this->utility_model->viewHeaderEmployee();
+		$this->load->view('employee/myinfo', $info);
+		$this->utility_model->viewFooterInternal();
+	}
 
 }
